@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import matter from "gray-matter";
 
+import { colors } from "@/theme/colors";
 import { getCategoryList, getPostListByCategory } from "@/apis/blog";
 
 import CategoryGrid from "@/components/blog/category-grid";
@@ -56,7 +57,14 @@ const PostListByCategory = ({
   return (
     <>
       <div>
-        <h3 style={{ fontSize: "18px", fontWeight: 500, marginBottom: "8px" }}>
+        <h3
+          style={{
+            fontSize: "18px",
+            fontWeight: 500,
+            marginBottom: "8px",
+            color: colors.darkGray,
+          }}
+        >
           Search Post by Categories
         </h3>
         <CategoryGrid

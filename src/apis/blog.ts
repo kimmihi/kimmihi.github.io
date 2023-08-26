@@ -10,6 +10,14 @@ export const getPostList = () => {
   return postList;
 };
 
+export const getPostItem = (id: string) => {
+  const postList = getPostList();
+  return postList.find((post) => {
+    const { data } = matter(post);
+    return data.id === id;
+  });
+};
+
 export const getPostListByCategory = (category: string) => {
   const postList = getPostList();
   return postList.filter((post) => {
@@ -22,6 +30,17 @@ export const getLatestPostList = (count: number) => {
   const latestPostList = sortedPostListByDate.slice(0, count);
 
   return latestPostList;
+};
+
+export const getPostIdList = () => {
+  const postList = getPostList();
+
+  return postList.map((post) => {
+    const {
+      data: { id },
+    } = matter(post);
+    return id;
+  });
 };
 
 export const getCategoryList = () => {
