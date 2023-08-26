@@ -6,21 +6,23 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import matter from "gray-matter";
 
-import { getBlogPosts, getCategoryList } from "@/apis/blog";
+import { getCategoryList, getPostListByCategory } from "@/apis/blog";
 
 import CategoryGrid from "@/components/blog/category-grid";
 import GridContainer from "@/components/blog/grid-container";
 import PostPreview from "@/components/blog/post-preview";
 
 interface Props {
+  category: string;
   posts: string[];
   categoryList: string[];
 }
-
-const Blog = ({ posts, categoryList }: Props) => {
+const PostListByCategory = ({ category, posts, categoryList }: Props) => {
   const router = useRouter();
-  const [checkedCategory, setCheckedCategory] = useState<string | null>(null);
   const [postList, setPostList] = useState<PostMatter[]>([]);
+  const [checkedCategory, setCheckedCategory] = useState<string | null>(
+    category
+  );
 
   const handleClickCategoryChip = (value: string) => {
     if (checkedCategory === value) {
@@ -45,6 +47,7 @@ const Blog = ({ posts, categoryList }: Props) => {
     setPostList(post_matters);
   }, [posts]);
 
+  console.log(postList);
   return (
     <>
       <div>
@@ -66,15 +69,28 @@ const Blog = ({ posts, categoryList }: Props) => {
   );
 };
 
-export default Blog;
+export async function getStaticPaths() {
+  const categoryList = getCategoryList();
 
-export async function getStaticProps() {
+  const paths = categoryList.map((category) => ({
+    params: {
+      category,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }: any) {
   try {
-    const posts = getBlogPosts();
+    const posts = getPostListByCategory(params.category);
     const categoryList = getCategoryList();
 
     return {
-      props: { posts, categoryList },
+      props: { category: params.category, posts, categoryList },
     };
   } catch (err) {
     console.error(err);
@@ -84,3 +100,4 @@ export async function getStaticProps() {
     };
   }
 }
+export default PostListByCategory;

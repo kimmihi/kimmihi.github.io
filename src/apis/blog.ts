@@ -24,6 +24,13 @@ export const getBlogPosts = () => {
   return posts;
 };
 
+export const getPostListByCategory = (category: string) => {
+  const postList = getBlogPosts();
+  return postList.filter((post) => {
+    const { data } = matter(post);
+    return data.category === category;
+  });
+};
 export const getLatestPosts = (count: number) => {
   const sorted_by_date_posts = getBlogPosts();
   const latest_posts = sorted_by_date_posts.slice(0, count);
@@ -32,9 +39,9 @@ export const getLatestPosts = (count: number) => {
 };
 
 export const getCategoryList = () => {
-  const posts = getBlogPosts();
+  const postList = getBlogPosts();
 
-  const categoryList = posts
+  const categoryList = postList
     .map((post) => {
       const {
         data: { category },
