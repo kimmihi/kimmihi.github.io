@@ -3,5 +3,5 @@ export interface PostMatter {
   title: string;
   date: string;
   summary: string;
-  thumb_nail?: string;
+  category: string;
 }

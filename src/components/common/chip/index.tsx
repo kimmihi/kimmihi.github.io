@@ -3,12 +3,13 @@ import { useState } from "react";
 import { colors } from "@/theme/colors";
 
 interface Props {
+  size?: "small" | "mid";
   value: string;
   checked: boolean;
-  onClick: (value: string) => void;
+  onClick?: (value: string) => void;
 }
 
-const Chip = ({ value, checked, onClick }: Props) => {
+const Chip = ({ size = "mid", value, checked, onClick }: Props) => {
   return (
     <div
       style={{
@@ -16,14 +17,14 @@ const Chip = ({ value, checked, onClick }: Props) => {
         display: "inline-flex",
         alignItems: "cneter",
         justifyContent: "center",
-        fontSize: "1rem",
-        padding: "12px 20px",
+        fontSize: size === "mid" ? "1rem" : "0.8125rem",
+        padding: size === "mid" ? "12px 20px" : "8px 16px",
         borderRadius: "24px",
         cursor: "pointer",
         color: checked ? "#fff" : colors.black,
-        backgroundColor: checked ? "#ffcc00" : "#fff",
+        backgroundColor: checked ? colors.yellow : "#fff",
       }}
-      onClick={() => onClick(value)}
+      onClick={() => (onClick ? onClick(value) : null)}
     >
       <span>{value}</span>
     </div>

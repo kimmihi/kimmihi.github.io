@@ -7,6 +7,8 @@ import matter from "gray-matter";
 import { getBlogPosts, getCategoryList } from "@/apis/blog";
 
 import CategoryGrid from "@/components/blog/category-grid";
+import GridContainer from "@/components/blog/grid-container";
+import PostPreview from "@/components/blog/post-preview";
 
 interface Props {
   posts: string[];
@@ -51,6 +53,11 @@ const Blog = ({ posts, categoryList }: Props) => {
           onClick={handleClickCategoryChip}
         />
       </div>
+      <GridContainer>
+        {postList.map((post) => (
+          <PostPreview key={post.id} postMatter={post} />
+        ))}
+      </GridContainer>
     </>
   );
 };

@@ -12,12 +12,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <main
-      style={{
-        height: "100vh",
-        backgroundColor: colors.white,
-      }}
-    >
+    <main>
       <Header />
       <Main>{children}</Main>
     </main>
