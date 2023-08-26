@@ -6,18 +6,18 @@ import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import matter from "gray-matter";
 
-import { getBlogPosts, getCategoryList } from "@/apis/blog";
+import { getPostList, getCategoryList } from "@/apis/blog";
 
 import CategoryGrid from "@/components/blog/category-grid";
 import GridContainer from "@/components/blog/grid-container";
 import PostPreview from "@/components/blog/post-preview";
 
 interface Props {
-  posts: string[];
+  matterPostList: string[];
   categoryList: string[];
 }
 
-const Blog = ({ posts, categoryList }: Props) => {
+const Blog = ({ matterPostList, categoryList }: Props) => {
   const router = useRouter();
   const [checkedCategory, setCheckedCategory] = useState<string | null>(null);
   const [postList, setPostList] = useState<PostMatter[]>([]);
@@ -34,7 +34,7 @@ const Blog = ({ posts, categoryList }: Props) => {
   };
 
   useEffect(() => {
-    const post_matters = posts.map((post) => {
+    const post_matters = matterPostList.map((post) => {
       const data = matter(post).data;
       return {
         ...data,
@@ -43,7 +43,7 @@ const Blog = ({ posts, categoryList }: Props) => {
     });
 
     setPostList(post_matters);
-  }, [posts]);
+  }, [matterPostList]);
 
   return (
     <>
@@ -70,11 +70,11 @@ export default Blog;
 
 export async function getStaticProps() {
   try {
-    const posts = getBlogPosts();
+    const matterPostList = getPostList();
     const categoryList = getCategoryList();
 
     return {
-      props: { posts, categoryList },
+      props: { matterPostList, categoryList },
     };
   } catch (err) {
     console.error(err);

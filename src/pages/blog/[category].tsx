@@ -14,10 +14,15 @@ import PostPreview from "@/components/blog/post-preview";
 
 interface Props {
   category: string;
-  posts: string[];
+  matterPostList: string[];
   categoryList: string[];
 }
-const PostListByCategory = ({ category, posts, categoryList }: Props) => {
+
+const PostListByCategory = ({
+  category,
+  matterPostList,
+  categoryList,
+}: Props) => {
   const router = useRouter();
   const [postList, setPostList] = useState<PostMatter[]>([]);
   const [checkedCategory, setCheckedCategory] = useState<string | null>(
@@ -36,7 +41,7 @@ const PostListByCategory = ({ category, posts, categoryList }: Props) => {
   };
 
   useEffect(() => {
-    const post_matters = posts.map((post) => {
+    const post_matters = matterPostList.map((post) => {
       const data = matter(post).data;
       return {
         ...data,
@@ -45,7 +50,7 @@ const PostListByCategory = ({ category, posts, categoryList }: Props) => {
     });
 
     setPostList(post_matters);
-  }, [posts]);
+  }, [matterPostList]);
 
   console.log(postList);
   return (
@@ -86,11 +91,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   try {
-    const posts = getPostListByCategory(params.category);
+    const matterPostList = getPostListByCategory(params.category);
     const categoryList = getCategoryList();
 
     return {
-      props: { category: params.category, posts, categoryList },
+      props: { category: params.category, matterPostList, categoryList },
     };
   } catch (err) {
     console.error(err);
