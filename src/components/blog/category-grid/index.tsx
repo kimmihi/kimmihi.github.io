@@ -11,8 +11,8 @@ const CategoryGrid = ({ checkedCategory, categoryList, onClick }: Props) => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(10%, auto))",
-        gap: "10px",
+        gridTemplateColumns: "repeat(auto-fill, minmax(5rem, auto))",
+        gap: "1rem",
       }}
     >
       {categoryList.map((category) => (

@@ -11,11 +11,17 @@ interface Props {
 
 const PostPreview = ({ postMatter }: Props) => {
   return (
-    <Link href={`/blog/posts/${postMatter.id}`}>
+    <Link
+      href={`/blog/posts/${postMatter.id}`}
+      style={{
+        width: "100%",
+        maxWidth: "37rem",
+        textDecoration: "none",
+      }}
+    >
       <div
         style={{
-          position: "relative",
-          maxWidth: "37rem",
+          minHeight: "24rem",
           display: "flex",
           flexDirection: "column",
           alignItems: "start",
@@ -24,8 +30,6 @@ const PostPreview = ({ postMatter }: Props) => {
           padding: "1.25rem",
           backgroundColor: "#fff",
           border: "1px solid #e6e6e6",
-          wordBreak: "break-word",
-          textDecoration: "none",
           cursor: "pointer",
         }}
       >

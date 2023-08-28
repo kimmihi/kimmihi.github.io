@@ -13,7 +13,7 @@ const Chip = ({ size = "mid", value, checked, onClick }: Props) => {
   return (
     <div
       style={{
-        maxWidth: "100%",
+        minWidth: "3rem",
         display: "inline-flex",
         alignItems: "cneter",
         justifyContent: "center",

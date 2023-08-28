@@ -14,7 +14,7 @@ const PostGridContainer = ({ children }: Props) => {
         marginTop: "32px",
         marginInline: "auto",
         paddingInline: "clamp(0, 1.2rem + 0.89vw, 2rem)",
-        gridTemplateColumns: "repeat(auto-fit, minmax(22rem, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
       }}
     >
       {children}
