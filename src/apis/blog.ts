@@ -2,9 +2,9 @@ import fs from "fs";
 import matter from "gray-matter";
 
 export const getPostList = () => {
-  const files = fs.readdirSync("public/posts/");
+  const files = fs.readdirSync("public/blog/posts/");
   const postList = files.map((filename) => {
-    return fs.readFileSync(`public/posts/${filename}`, "utf-8");
+    return fs.readFileSync(`public/blog/posts/${filename}`, "utf-8");
   });
 
   return postList;
@@ -55,5 +55,5 @@ export const getCategoryList = () => {
     })
     .sort((a, b) => a - b);
 
-  return Array.from(new Set(categoryList)).sort((a, b) => a - b);
+  return Array.from(new Set(categoryList));
 };

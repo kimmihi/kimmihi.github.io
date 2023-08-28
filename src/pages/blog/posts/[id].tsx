@@ -1,10 +1,8 @@
 import type { PostMatter } from "@/types/blog";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
 
 import dayjs from "dayjs";
-import fs from "fs";
 import matter from "gray-matter";
 import gfm from "remark-gfm";
 import slug from "remark-slug";

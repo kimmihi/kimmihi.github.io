@@ -3,6 +3,7 @@ id: window-open
 title: window.open을 사용할 때 알아두면 좋은 점
 date: 2023-04-20
 category: javascript
+thumb_nail: /blog/images/window-open/test2.png
 summary: 여러 개의 창을 열어 모니터링을 할 수 있도록 window.open을 사용하였다. 이때 몇 가지 문제가 있다는 것을 발견하였고 이를 해결하기 위한 방법을 정리하였다.
 ---
 
