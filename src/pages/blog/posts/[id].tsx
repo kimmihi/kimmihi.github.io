@@ -4,9 +4,22 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import dayjs from "dayjs";
+import fs from "fs";
 import matter from "gray-matter";
+import gfm from "remark-gfm";
+import slug from "remark-slug";
+import ReactMarkdown from "react-markdown";
 
 import { getPostIdList, getPostItem } from "@/apis/blog";
+
+import H1 from "@/components/blog/markdown/header/h1";
+import H2 from "@/components/blog/markdown/header/h2";
+import H3 from "@/components/blog/markdown/header/h3";
+import Img from "@/components/blog/markdown/img";
+import LiBlock from "@/components/blog/markdown/li-block";
+import CodeBlock from "@/components/blog/markdown/code-block";
+import Paragraph from "@/components/blog/markdown/paragraph";
+import BlockquoteBlock from "@/components/blog/markdown/blockquote-block";
 
 interface Props {
   matterPost: string;
@@ -23,9 +36,23 @@ const DetailPost = ({ matterPost }: Props) => {
     } as PostMatter);
   }, [matterPost]);
   return (
-    <>
-      <h1>{post?.title}</h1>
-    </>
+    <article style={{ margin: "0 10vw" }}>
+      <ReactMarkdown
+        remarkPlugins={[gfm, slug]}
+        components={{
+          h1: H1,
+          h2: H2,
+          h3: H3,
+          img: Img,
+          li: LiBlock,
+          p: Paragraph,
+          code: CodeBlock,
+          blockquote: BlockquoteBlock,
+        }}
+      >
+        {matter(matterPost).content}
+      </ReactMarkdown>
+    </article>
   );
 };
 
