@@ -34,7 +34,7 @@ const DetailPost = ({ matterPost }: Props) => {
     } as PostMatter);
   }, [matterPost]);
   return (
-    <article style={{ margin: "0 10vw" }}>
+    <article style={{ margin: "0 5vw", padding: "5vw 0" }}>
       <ReactMarkdown
         remarkPlugins={[gfm, slug]}
         components={{
